@@ -21,6 +21,9 @@ from latentsync.pipelines.lipsync_pipeline import LipsyncPipeline
 from diffusers.utils.import_utils import is_xformers_available
 from accelerate.utils import set_seed
 from latentsync.whisper.audio2feature import Audio2Feature
+from gfpgan import GFPGANer
+from basicsr.utils.registry import ARCH_REGISTRY
+from torchvision.transforms.functional import normalize
 
 
 def main(config, args):
@@ -97,6 +100,8 @@ if __name__ == "__main__":
     parser.add_argument("--inference_steps", type=int, default=20)
     parser.add_argument("--guidance_scale", type=float, default=1.0)
     parser.add_argument("--seed", type=int, default=1247)
+    parser.add_argument('--superres', type=str, choices=['GFPGAN', 'CodeFormer'], default=None,
+                    help='Apply super-resolution to the generated face region.')
     args = parser.parse_args()
 
     config = OmegaConf.load(args.unet_config_path)

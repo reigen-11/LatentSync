@@ -13,6 +13,13 @@ pip install -r requirements.txt
 # OpenCV dependencies
 sudo apt -y install libgl1
 
+# Install GFPGAN and CodeFormer dependencies
+pip install gfpgan
+pip install basicsr
+pip install facexlib
+pip install realesrgan
+pip install lpips
+
 # Download all the checkpoints from HuggingFace
 huggingface-cli download ByteDance/LatentSync --local-dir checkpoints --exclude "*.git*" "README.md"
 
